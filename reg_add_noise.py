@@ -69,7 +69,6 @@ if __name__ == "__main__":
     batch_idx, (example_tr_data, example_tr_targets) = next(examples_train)
     batch_idx, (example_te_data, example_te_targets) = next(examples_test)
     
-
     example_tr_data = example_tr_data.reshape(-1, 784)
     example_te_data = example_te_data.reshape(-1, 784)
 
@@ -105,4 +104,9 @@ if __name__ == "__main__":
     hf.create_dataset('te_data3', data=dataset_te_data3)
     hf.create_dataset('te_data3_normal', data=dataset_te_data3_normal)
     hf.create_dataset("te_data3_laplace", data=dataset_te_data3_laplace)  
+        
+    
+    
+    
+    
     

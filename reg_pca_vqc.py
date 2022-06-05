@@ -16,6 +16,7 @@ import torch.nn as nn
 import torch.nn.functional as F 
 
 from tc.tc_fc import TTLinear 
+from sklearn.decomposition import PCA
 
 parser = argparse.ArgumentParser(description='Training a TTN-VQC model on the MNIST dataset')
 parser.add_argument('--save_path', metavar='DIR', default='models', help='saved model path')
@@ -25,8 +26,8 @@ parser.add_argument('--num_epochs', default=15, help='The number of epochs', typ
 parser.add_argument('--depth_vqc', default=6, help='The depth of VQC', type=int)
 parser.add_argument('--lr', default=0.005, help='Learning rate', type=float)
 parser.add_argument('--feat_dims', default=784, help='The dimensions of features', type=int)
-parser.add_argument('--n_class', default=10, help='number of classification classes', type=int)
-parser.add_argument('--max_data', default=10000, help='The maximum number of training data', type=int)
+parser.add_argument('--n_class', default=8, help='number of classification classes', type=int)
+parser.add_argument('--max_data', default=60000, help='The maximum number of training data', type=int)
 
 args = parser.parse_args()
 dev = qml.device("default.qubit", wires=args.num_qubits)
@@ -92,14 +93,14 @@ class TTN_VQC(nn.Module):
         super(TTN_VQC, self).__init__()
         self.n_qubits = n_qubits
         self.q_depth = q_depth
-        self.ttn = TTLinear([7, 16, 7], [2, 2, 2], tt_rank=[1, 3, 3, 1])
+     #  self.ttn = TTLinear([7, 16, 7], [2, 2, 2], tt_rank=[1, 3, 3, 1])
         self.q_params = nn.Parameter(0.01 * torch.randn(q_depth * n_qubits * 3))
         self.post_net = nn.Linear(n_qubits, args.feat_dims)
         
     def forward(self, input_features):
-        pre_out = self.ttn(input_features).to(device)
-        q_in = pre_out * np.pi / 2.0
-        
+        #pre_out = self.ttn(input_features).to(device)
+        #q_in = pre_out * np.pi / 2.0
+        q_in = input_features * np.pi / 2.0
         # Apply the quantum circuit to each element of the batch and append it to q_out
         q_out = torch.Tensor(0, self.n_qubits)
         q_out = q_out.to(device)
@@ -123,6 +124,12 @@ if __name__ == "__main__":
     test_clean_data = data_file['te_data3'][:args.max_data][:]
     test_laplace_data = data_file['te_data3_laplace'][:args.max_data][:]
     
+    pca = PCA(n_components=8)
+    train_normal_data = pca.fit_transform(train_normal_data)
+   # train_clean_data = pca.fit_transform(train_clean_data)
+    test_normal_data = pca.fit_transform(test_normal_data)
+    test_laplace_data = pca.fit_transform(test_laplace_data)
+   # test_clean_data = pca.fit_transform(test_clean_data)
     n_batches = int(args.max_data / args.batch_size)
     
     # Model training 
@@ -142,7 +149,8 @@ if __name__ == "__main__":
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                         epoch, i * len(data), args.max_data,
                         100. * i / n_batches, loss.item()))
-        print('Train Epcoh: {} \tLoss: {:.6f}'.format(epoch, train_loss / n_batches))  
+        print('Train Epcoh: {} \tLoss: {:.6f}'.format(epoch, train_loss / n_batches)) 
+        
         model.eval()
         test_loss_normal = 0
         test_loss_laplace = 0
@@ -163,4 +171,6 @@ if __name__ == "__main__":
          #   acc = 100. * float(correct) / len(test_data)
             print('\nTest set: Average loss:  normal {:.4f}, laplace ({:.4f})\n'.format(
                     test_loss_normal,  test_loss_laplace))
-        
+            
+            
+            
