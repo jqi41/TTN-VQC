@@ -17,4 +17,7 @@ cd Pytorch-Tensor-Train-Network
 python setup.py install
 ```
 
-
+## Code instruction
+reg_add_noise.py: generate noisy image data
+reg_ttn_vqc.py: the implementation of TTN-VQC model
+reg_pca_vqc.py: the implementation of PCA-VQC model
