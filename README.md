@@ -24,3 +24,9 @@ reg_add_noise.py: generate noisy image data
 reg_ttn_vqc.py: the implementation of TTN-VQC model
 
 reg_pca_vqc.py: the implementation of PCA-VQC model
+
+## ReferenceL:
+
+This package is related to our recently submitted paper 
+
+Jun Qi, Huck Yang, Pin-Yu Chen, Min-Hsiu Hsieh, "Theoretical Error Performance Analysis for Variational Quantum Circuit Based Functional Regression,” in submission.
