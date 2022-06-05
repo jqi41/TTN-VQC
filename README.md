@@ -17,7 +17,7 @@ cd Pytorch-Tensor-Train-Network
 python setup.py install
 ```
 
-## Code instruction
+## Usage of Codes
 
 reg_add_noise.py: generate noisy image data
 
