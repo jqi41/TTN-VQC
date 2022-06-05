@@ -25,7 +25,7 @@ reg_ttn_vqc.py: the implementation of TTN-VQC model
 
 reg_pca_vqc.py: the implementation of PCA-VQC model
 
-## ReferenceL:
+## Reference:
 
 This package is related to our recently submitted paper 
 
