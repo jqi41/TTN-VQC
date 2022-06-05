@@ -11,19 +11,10 @@ cd TTN-VQC
 
 The main dependencies include *pytorch*, *pennylane*. To download and install *tc*:
 
-## Tensor-Train Neural Network for Image Processing
-
-- TTN AE result
-
-![img](https://github.com/uwjunqi/Tensor-Train-Neural-Network/blob/master/image/ttn.png)
-
-- DNN AE result
-
-![img](https://github.com/uwjunqi/Tensor-Train-Neural-Network/blob/master/image/ae_results.png)
-
 ```
-cd image
-python train_tt_image.py
+git clone https://github.com/uwjunqi/Pytorch-Tensor-Train-Network.git
+cd Pytorch-Tensor-Train-Network
+python setup.py install
 ```
 
 
