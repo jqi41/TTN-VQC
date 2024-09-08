@@ -27,6 +27,8 @@ reg_pca_vqc.py: the implementation of PCA-VQC model
 
 ## Reference:
 
-This package is related to our recently submitted paper 
+This package is related to our papers
 
-Jun Qi, Chao-Han Huck Yang, Pin-Yu Chen, Min-Hsiu Hsieh, "Theoretical Error Performance Analysis for Variational Quantum Circuit Based Functional Regression," npj Quantum Information, Nature Publishing Group UK London,  Vol. 9, no. 4, 2023
+[1] Jun Qi, Chao-Han Huck Yang, Pin-Yu Chen, Min-Hsiu Hsieh, "Theoretical Error Performance Analysis for Variational Quantum Circuit Based Functional Regression," npj Quantum Information, Nature Publishing Group UK London,  Vol. 9, no. 4, 2023
+
+[2] Jun Qi, Chao-Han Huck Yang, Pin-Yu Chen, "QTN-VQC: An End-to-End Learning Framework for Quantum Neural Networks," Physica Scripta, Vol. 99, no. 1, pp. 015111, 2023
